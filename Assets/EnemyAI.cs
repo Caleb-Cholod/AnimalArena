@@ -98,12 +98,10 @@ public class EnemyAI : MonoBehaviour
 
             if (distanceToPlayer > 5f + 0.1f)
             {
-                // Too far, move closer
                 moveDirection = transform.up;
             }
             else if (distanceToPlayer < 5f - 0.1f)
             {
-                // Too close, back up
                 moveDirection = -transform.up;
             }
             transform.position += (Vector3)(moveDirection * moveSpeed * Time.deltaTime);
@@ -126,8 +124,6 @@ public class EnemyAI : MonoBehaviour
                 shootTimer = 0f;
                 ShootAtPlayer();
 
-
-
             }
 
             //move close or further
@@ -144,12 +140,10 @@ public class EnemyAI : MonoBehaviour
 
             if (distanceToPlayer > 3f + 0.1f)
             {
-                // Too far, move closer
                 moveDirection = transform.up;
             }
             else if (distanceToPlayer < 3f - 0.1f)
             {
-                // Too close, back up
                 moveDirection = -transform.up;
             }
             else
