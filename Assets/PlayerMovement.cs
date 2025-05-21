@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
+    public float playerHealth = 100f;
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -32,4 +33,18 @@ public class PlayerMovement : MonoBehaviour
         //move
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
+
+    public void TakeDamage(float amount)
+    {
+        playerHealth -= amount;
+        playerHealth = Mathf.Clamp(playerHealth, 0, 100);
+        Debug.Log("Player health: " + playerHealth);
+
+        if (playerHealth <= 0)
+        {
+            //player dies - make this into a reset screen/animation/whatever
+            Destroy(this.gameObject);
+        }
+    }
+
 }
