@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    // Start is called before the first frame update
     public float damage = 20f;
     private float bulletLifetime = 5f;
     private float bulletlifetimeDelta;
@@ -13,7 +12,6 @@ public class Bullet : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         bulletlifetimeDelta += Time.deltaTime;
@@ -36,11 +34,11 @@ public class Bullet : MonoBehaviour
             }
             Debug.Log("Hit");
 
-            Destroy(gameObject); // Bullet disappears on hit
+            Destroy(gameObject);
         }
         else if (!collision.CompareTag("Player"))
         {
-            Destroy(gameObject); // Optional: destroy on walls or other things
+            Destroy(gameObject);
         }
     }
 

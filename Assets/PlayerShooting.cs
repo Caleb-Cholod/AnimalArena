@@ -13,7 +13,7 @@ public class PlayerShooting : MonoBehaviour
     void Update()
     {
         FRdelta += Time.deltaTime;
-        if (Input.GetMouseButton(0) && FRdelta > fireRate) // Left click
+        if (Input.GetMouseButton(0) && FRdelta > fireRate) //Left click
         {
             FRdelta = 0;
             Shoot();
