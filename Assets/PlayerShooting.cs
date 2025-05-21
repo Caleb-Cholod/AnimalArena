@@ -4,6 +4,7 @@ public class PlayerShooting : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public Transform firePoint;
+    //Stats -------------
     public float bulletSpeed = 10f;
     public float fireRate = 1f;
     private float FRdelta;

@@ -2,16 +2,19 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private Rigidbody2D rb;
+    private Vector2 movement;
+
+    //Player Stats
+    //--------------------
     public float moveSpeed = 5f;
     public float playerHealth = 100f;
 
-    private Rigidbody2D rb;
-    private Vector2 movement;
+    
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
 
     }
 
