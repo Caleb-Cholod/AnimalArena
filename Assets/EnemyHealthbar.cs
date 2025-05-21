@@ -3,11 +3,10 @@ using UnityEngine.UI;
 
 public class EnemyHealthBar : MonoBehaviour
 {
-    public Image fillImage;           // The green part (health fill)
-    public Transform enemyTransform;  // Reference to the enemy position
-    public Vector3 offset = new Vector3(0, .5f, 0); // Offset above enemy
+    public Image fillImage;  
+    public Transform enemyTransform; 
+    public Vector3 offset = new Vector3(0, .5f, 0);
 
-    [Header("Health Settings")]
     public float maxHealth = 100f;
     private float currentHealth = 100f;
 
@@ -21,9 +20,9 @@ public class EnemyHealthBar : MonoBehaviour
 
     void Update()
     {
-        // Keep the health bar positioned above the enemy
+        //healthbar above obj
         transform.position = enemyTransform.position + offset;
-        transform.rotation = Quaternion.identity; // Keep it upright
+        transform.rotation = Quaternion.identity;
     }
 
     public void TakeDamage(float amount)
