@@ -16,6 +16,8 @@ public class EnemyHealthBar : MonoBehaviour
 
         if (enemyTransform == null)
             enemyTransform = transform.parent;
+
+        
     }
 
     void Update()
@@ -30,6 +32,8 @@ public class EnemyHealthBar : MonoBehaviour
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         UpdateHealthBar();
+
+
     }
 
     private void UpdateHealthBar()
@@ -39,7 +43,12 @@ public class EnemyHealthBar : MonoBehaviour
 
         if(currentHealth <= 0)
         {
+            //kill enemy
             Destroy(gameObject.transform.parent.gameObject);
+            //update director
+            GameObject Director = GameObject.FindWithTag("EnemyDirector");
+            Director.GetComponent<EnemyDirector>().enemySlain();
+
         }
     }
 

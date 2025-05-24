@@ -15,6 +15,17 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        GameObject player = GameObject.FindWithTag("Player");
+        PlayerItems playerItems = player.GetComponent<PlayerItems>();
+        //get item stats
+        if (playerItems.HasItem("Boots of Mercury"))
+        {
+            moveSpeed += 1f;
+        }
+        if (playerItems.HasItem("Armor"))
+        {
+            playerHealth += 12;
+        }
 
     }
 
