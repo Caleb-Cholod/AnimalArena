@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
+    private SpriteRenderer sr;
     public GameObject bulletPrefab;
     public GameObject BigbulletPrefab;
     public Transform firePoint;
@@ -21,11 +22,16 @@ public class PlayerShooting : MonoBehaviour
     public Vector2 ForceDirection;
     private float KnockbackAmount = 25;
 
+    public GameObject PlayerAfterimage;
+
+
 
     private void Start()
     {
         GameObject player = GameObject.FindWithTag("Player");
         playerItems = player.GetComponent<PlayerItems>();
+
+        sr = transform.GetChild(0).GetComponent<SpriteRenderer>();
 
         if (playerItems.HasItem("Boots of Mercury"))
         {
@@ -61,6 +67,9 @@ public class PlayerShooting : MonoBehaviour
             //apply knockback
             gameObject.GetComponent<Rigidbody2D>().AddForce((ForceDirection * KnockbackAmount), ForceMode2D.Force);
             Debug.Log("knockback");
+            GameObject afterimg = Instantiate(PlayerAfterimage, transform.position, transform.rotation);
+            afterimg.SetActive(true);
+
             if (knockbackDelta > knockbackDuration)
             {
                 isBeingKnockedBack = false;
@@ -90,6 +99,10 @@ public class PlayerShooting : MonoBehaviour
             Vector2 direction = (mouseWorldPosition - transform.position);
 
             ForceDirection = -direction.normalized;//(transform.position - (Vector3)direction).normalized;
+
+            //AfterImage
+            GameObject afterimg = Instantiate(PlayerAfterimage, transform.position, transform.rotation);
+            afterimg.SetActive(true);
 
         }
     }

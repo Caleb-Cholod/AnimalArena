@@ -14,6 +14,12 @@ public class EnemyAI : MonoBehaviour
     public float bulletSpeed = 5f;
     private float shootTimer;
 
+    public GameObject miniSummon;
+    private int numSummons;
+    private float summonTimer = 5f;
+    private float summonDelta;
+    public bool isASummon;
+
     private Transform player;
 
     public int AItype;
@@ -154,6 +160,45 @@ public class EnemyAI : MonoBehaviour
         }
 
 
+
+        //AI - Summoner
+        if (AItype == 4)
+        {
+
+            // Rotate toward the player
+            Vector2 direction = (player.position - transform.position).normalized;
+            float angle = Vector3.SignedAngle(transform.up, direction, Vector3.forward);
+            float step = rotationSpeed * Time.deltaTime;
+            transform.Rotate(Vector3.forward, Mathf.Clamp(angle, -step, step));
+
+            // Summon timer
+            summonDelta += Time.deltaTime;
+            if (numSummons <= 2)
+            {
+                if (summonDelta >= summonTimer)
+                {
+
+                    summonDelta = 0f;
+                    numSummons += 1;
+                    SummonFriendly();
+                }
+            }
+            else
+            {
+                //chase down player
+                Vector2 direction1 = (player.position - transform.position).normalized;
+
+                //rotate to player
+                float angle1 = Vector3.SignedAngle(transform.up, direction1, Vector3.forward);
+                float rotationStep = rotationSpeed * Time.deltaTime;
+                float clampedAngle = Mathf.Clamp(angle1, -rotationStep, rotationStep);
+                transform.Rotate(Vector3.forward, clampedAngle);
+
+                //move
+                transform.position += transform.up * moveSpeed * Time.deltaTime;
+            }
+        }
+
     }
 
         void ShootAtPlayer()
@@ -162,6 +207,14 @@ public class EnemyAI : MonoBehaviour
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.velocity = firePoint.up * bulletSpeed;
         }
+
+        void SummonFriendly()
+        {
+        //create enemy
+            GameObject miniEnemy = Instantiate(miniSummon, firePoint.position, firePoint.rotation);
+            miniEnemy.GetComponent<EnemyAI>().isASummon = true;
+            miniEnemy.transform.GetChild(1).gameObject.GetComponent<EnemyHealthBar>().maxHealth = 50;
     }
+}
 
 

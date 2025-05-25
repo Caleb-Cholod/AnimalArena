@@ -47,7 +47,12 @@ public class EnemyHealthBar : MonoBehaviour
             Destroy(gameObject.transform.parent.gameObject);
             //update director
             GameObject Director = GameObject.FindWithTag("EnemyDirector");
-            Director.GetComponent<EnemyDirector>().enemySlain();
+            //if its not a summon
+            if (!gameObject.transform.parent.gameObject.GetComponent<EnemyAI>().isASummon)
+            {
+                Director.GetComponent<EnemyDirector>().enemySlain();
+            }
+            
 
         }
     }

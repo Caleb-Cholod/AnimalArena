@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
     private Vector2 movement;
 
     //Player Stats
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = transform.GetChild(0).GetComponent<SpriteRenderer>();
         GameObject player = GameObject.FindWithTag("Player");
         PlayerItems playerItems = player.GetComponent<PlayerItems>();
         //get item stats
