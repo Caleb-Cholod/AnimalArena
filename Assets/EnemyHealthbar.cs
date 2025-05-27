@@ -43,16 +43,22 @@ public class EnemyHealthBar : MonoBehaviour
 
         if(currentHealth <= 0)
         {
-            //kill enemy
-            Destroy(gameObject.transform.parent.gameObject);
-            //update director
             GameObject Director = GameObject.FindWithTag("EnemyDirector");
             //if its not a summon
             if (!gameObject.transform.parent.gameObject.GetComponent<EnemyAI>().isASummon)
             {
+                //update director
                 Director.GetComponent<EnemyDirector>().enemySlain();
+                //Get gold
+                GameObject DataHolder = GameObject.FindWithTag("DataHolder");
+                //this line sucks lol
+                DataHolder.GetComponent<DataHolder>().UpdateGold(gameObject.transform.parent.gameObject.GetComponent<EnemyAI>().goldDropped[gameObject.transform.parent.gameObject.GetComponent<EnemyAI>().AItype]);
+
             }
+            //kill enemy
+            Destroy(gameObject.transform.parent.gameObject);
             
+
 
         }
     }

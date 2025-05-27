@@ -7,7 +7,7 @@
 //()Enemy Randomized Stats
 //()Item Get Implementation
 //()Settings?
-//()Add in Items
+//()Add in rest of Items
 //()Lighting
 //()Shadow cast Script
 //()Gold and Health UI

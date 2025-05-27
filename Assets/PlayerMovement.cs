@@ -19,6 +19,10 @@ public class PlayerMovement : MonoBehaviour
         sr = transform.GetChild(0).GetComponent<SpriteRenderer>();
         GameObject player = GameObject.FindWithTag("Player");
         PlayerItems playerItems = player.GetComponent<PlayerItems>();
+
+        //set player position
+        transform.position = new Vector3(-4f, 0f, 0f);
+
         //get item stats
         if (playerItems.HasItem("Boots of Mercury"))
         {

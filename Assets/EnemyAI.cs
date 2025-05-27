@@ -23,9 +23,16 @@ public class EnemyAI : MonoBehaviour
     private Transform player;
 
     public int AItype;
+    public int[] goldDropped = new int[5];
 
     void Start()
     {
+
+        goldDropped[0] = 5;
+        goldDropped[1] = 7;
+        goldDropped[2] = 8;
+        goldDropped[3] = 10;
+        goldDropped[4] = 12;
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)

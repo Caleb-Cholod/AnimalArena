@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - EnemyDirector
+  - DataHolder
   layers:
   - Default
   - TransparentFX
