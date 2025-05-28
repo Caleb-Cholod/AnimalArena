@@ -24,9 +24,9 @@ public class EnemyBullet : MonoBehaviour
 
             Destroy(gameObject);
         }
-        else if (!collision.CompareTag("Enemy"))
-        {
-            Destroy(gameObject); // Optional: destroy if hitting walls or obstacles
-        }
+        //else if (!collision.CompareTag("Enemy"))
+        //{
+        //    Destroy(gameObject); // Optional: destroy if hitting walls or obstacles
+        //}
     }
 }

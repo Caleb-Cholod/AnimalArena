@@ -331,6 +331,7 @@ MonoBehaviour:
   rotationSpeed: 180
   shootInterval: 2
   bulletPrefab: {fileID: 2334930781163399437, guid: b2f6da15e7d8e3948b5223ea15d8658a, type: 3}
+  meleePrefab: {fileID: 2334930781163399437, guid: 2e542e3359fdf3544b0ead2241dc73b2, type: 3}
   firePoint: {fileID: 8257509590322946495}
   bulletSpeed: 5
   miniSummon: {fileID: 6494517208345779092, guid: 36e7790be67d7ce4ebdea4a2709cb152, type: 3}

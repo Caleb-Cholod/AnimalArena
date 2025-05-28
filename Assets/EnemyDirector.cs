@@ -26,18 +26,26 @@ public class EnemyDirector : MonoBehaviour
         enemiesAlive = 3;
         waveNumber = DataHolder.GetComponent<DataHolder>().waveNumber;
 
+        int randomSeed = Random.Range(0, 10000);
+
         //create and add enemies based on wave
+        //Enemy1
         GameObject enemy1 = Instantiate(enemyPrefab);
         enemy1.transform.position = sp1;
-        enemy1.GetComponent<EnemyAI>().AItype = 2;
+        enemy1.GetComponent<EnemyAI>().RestatEnemy(randomSeed, waveNumber);
 
+
+        //Enemy2
+        randomSeed = Random.Range(0, 10000);
         GameObject enemy2 = Instantiate(enemyPrefab);
         enemy2.transform.position = sp2;
-        enemy2.GetComponent<EnemyAI>().AItype = 3;
+        enemy2.GetComponent<EnemyAI>().RestatEnemy(randomSeed, waveNumber);
 
+        //Enemy3
+        randomSeed = Random.Range(0, 10000);
         GameObject enemy3 = Instantiate(enemyPrefab);
         enemy3.transform.position = sp3;
-        enemy3.GetComponent<EnemyAI>().AItype = 4;
+        enemy3.GetComponent<EnemyAI>().RestatEnemy(randomSeed, waveNumber);
 
 
         //add enemies

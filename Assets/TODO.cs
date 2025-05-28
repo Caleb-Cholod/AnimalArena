@@ -3,8 +3,8 @@
 //()Boss
 //()Shop Progress/UI
 //()Main Menu
-//()Enemy Spawn Waves and Complexity
-//()Enemy Randomized Stats
+//(X)Enemy Spawn Waves and Complexity
+//(X)Enemy Randomized Stats
 //()Item Get Implementation
 //()Settings?
 //()Add in rest of Items

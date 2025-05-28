@@ -10,13 +10,17 @@ public class EnemyAI : MonoBehaviour
 
     public float shootInterval = 2f;
     public GameObject bulletPrefab;
+    public GameObject meleePrefab;
     public Transform firePoint;
     public float bulletSpeed = 5f;
     private float shootTimer;
 
+    private float meleeTimer;
+    public float meleeInterval = 1f;
+
     public GameObject miniSummon;
     private int numSummons;
-    private float summonTimer = 5f;
+    private float summonTimer = 3f;
     private float summonDelta;
     public bool isASummon;
 
@@ -57,6 +61,14 @@ public class EnemyAI : MonoBehaviour
 
             //move
             transform.position += transform.up * moveSpeed * Time.deltaTime;
+
+            //attack if possible
+            meleeTimer += Time.deltaTime;
+            if (meleeTimer >= meleeInterval)
+            {
+                meleeTimer = 0f;
+                MeleeAtPlayer();
+            }
         }
         //AI - Turret
         if (AItype == 1)
@@ -215,12 +227,33 @@ public class EnemyAI : MonoBehaviour
             rb.velocity = firePoint.up * bulletSpeed;
         }
 
+        void MeleeAtPlayer()
+        {
+            GameObject bullet = Instantiate(meleePrefab, firePoint.position, firePoint.rotation);
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            bullet.transform.position += transform.up;
+            bullet.GetComponent<EnemyBullet>().lifetime = 0.5f;
+            
+        }
+
         void SummonFriendly()
         {
         //create enemy
             GameObject miniEnemy = Instantiate(miniSummon, firePoint.position, firePoint.rotation);
             miniEnemy.GetComponent<EnemyAI>().isASummon = true;
             miniEnemy.transform.GetChild(1).gameObject.GetComponent<EnemyHealthBar>().maxHealth = 50;
+    }
+
+    public void RestatEnemy(int seed, int waveNum)
+    {
+        //Set to a random type
+        AItype = seed % 5;
+
+        //give random stats
+        moveSpeed = 2.5f + (seed % 10)/10;
+        rotationSpeed = 150f + (seed % 60);
+        shootInterval = 1.5f + (seed%20)/15;
+        bulletSpeed = 4f + (seed%5)/2.5f;
     }
 }
 
