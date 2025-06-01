@@ -14,19 +14,13 @@ public class EnemyBullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-        {
-            PlayerMovement playerHealth = collision.GetComponent<PlayerMovement>();
-            if (playerHealth != null)
+
+            if (collision.CompareTag("Player"))
             {
-                playerHealth.TakeDamage(damage);
+                collision.gameObject.GetComponent<PlayerMovement>().TakeDamage(damage);
+                Destroy(gameObject);
+                Debug.Log("Hurt");
             }
 
-            Destroy(gameObject);
-        }
-        //else if (!collision.CompareTag("Enemy"))
-        //{
-        //    Destroy(gameObject); // Optional: destroy if hitting walls or obstacles
-        //}
     }
 }

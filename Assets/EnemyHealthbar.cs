@@ -10,6 +10,8 @@ public class EnemyHealthBar : MonoBehaviour
     public float maxHealth = 100f;
     private float currentHealth = 100f;
 
+    public AudioSource EnemyHitSFX;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -31,6 +33,23 @@ public class EnemyHealthBar : MonoBehaviour
     {
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        //
+        //Pitch Bending----------
+        // Load AudioMixer and AudioMixerGroup separately
+        /*var pitchMixer = Resources.Load<UnityEngine.Audio.AudioMixer>("pitchBendGroup");
+        var pitchBendGroup = pitchMixer.FindMatchingGroups("PitchMixer")[0]; // or use correct path
+
+        EnemyHitSFX.outputAudioMixerGroup = pitchBendGroup;
+
+        // Set pitch and update exposed param
+        float tempo = Random.Range(0.8f, 1.2f);
+        EnemyHitSFX.pitch = tempo;
+        pitchMixer.SetFloat("MyExposedParam1", 1f / tempo);
+        */
+
+        EnemyHitSFX.Play();
+
+
         UpdateHealthBar();
 
 

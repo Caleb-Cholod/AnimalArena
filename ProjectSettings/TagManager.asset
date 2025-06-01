@@ -8,6 +8,7 @@ TagManager:
   - EnemyDirector
   - DataHolder
   - EnemyMelee
+  - PlayerItems
   layers:
   - Default
   - TransparentFX

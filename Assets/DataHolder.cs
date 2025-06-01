@@ -10,6 +10,8 @@ public class DataHolder : MonoBehaviour
     // Start is called before the first frame update
     public int gold = 0;
     public int waveNumber = 1;
+
+    public Sprite[] sprites;
     void Start()
     {
         

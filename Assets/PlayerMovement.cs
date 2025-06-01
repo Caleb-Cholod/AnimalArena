@@ -11,6 +11,11 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public float playerHealth = 100f;
 
+    //Audio
+    public AudioSource FootstepsFX;
+    public AudioSource FootstepsFX1;
+    private float footstepDelta;
+    private bool step1 = true;
     
 
     void Start()
@@ -40,7 +45,24 @@ public class PlayerMovement : MonoBehaviour
         //get movement
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+
         movement = movement.normalized;
+        //play footstpes fx
+        footstepDelta += Time.deltaTime;
+        if(footstepDelta > Random.Range(0.7f, 30f))
+        {
+            footstepDelta = 0f;
+            if (step1)
+            {
+                FootstepsFX.Play();
+                step1 = false;
+            }
+            else
+            {
+                step1 = true;
+                FootstepsFX1.Play();
+            }
+        }
 
         //rotate
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

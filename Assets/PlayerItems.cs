@@ -9,6 +9,8 @@ public class PlayerItems : MonoBehaviour
 {
     // List of item names or item IDs
     public List<string> items = new List<string>();
+    private int cost = 10;
+    public GameObject DataHolder;
 
     //Items List
     //=======================
@@ -35,6 +37,10 @@ public class PlayerItems : MonoBehaviour
     //Item 11 - Jupiter’s Lightning: increases attack by 5, increases range by 10, 5% chance to paralyze enemy
 
 
+    public void Start()
+    {
+        DataHolder = GameObject.FindWithTag("DataHolder");
+    }
     // Add an item
     public void AddItem(string itemName)
     {
@@ -43,6 +49,65 @@ public class PlayerItems : MonoBehaviour
             items.Add(itemName);
             Debug.Log("Picked up item: " + itemName);
         }
+    }
+
+    public void AddItemByInt(int itemID)
+    {
+        switch (itemID)
+        {
+            case 0:
+                //
+                if (!items.Contains("Axe") && DataHolder.GetComponent<DataHolder>().gold >= cost)
+                {
+                    items.Add("Axe");
+                    DataHolder.GetComponent<DataHolder>().UpdateGold(-cost);
+                }
+                break;
+            case 1:
+                //
+                if (!items.Contains("Shield") && DataHolder.GetComponent<DataHolder>().gold >= cost)
+                {
+                    items.Add("Shield");
+                    DataHolder.GetComponent<DataHolder>().UpdateGold(-cost);
+                }
+                break;
+            case 2:
+                //
+                if (!items.Contains("Armor") && DataHolder.GetComponent<DataHolder>().gold >= cost)
+                {
+                    items.Add("Armor");
+                    DataHolder.GetComponent<DataHolder>().UpdateGold(-cost);
+                }
+                    
+                break;
+
+            case 3:
+                //
+                if (!items.Contains("Spear") && DataHolder.GetComponent<DataHolder>().gold >= cost)
+                {
+                    items.Add("Spear");
+                    DataHolder.GetComponent<DataHolder>().UpdateGold(-cost);
+                }
+                    
+                break;
+
+            case 4:
+                //
+                if (!items.Contains("ArtemisQuiver") && DataHolder.GetComponent<DataHolder>().gold >= cost)
+                {
+                    items.Add("ArtemisQuiver");
+                    DataHolder.GetComponent<DataHolder>().UpdateGold(-cost);
+                }
+                    
+                break;
+
+
+
+            default:
+                break;
+        }
+        
+            
     }
 
     // Check if player has an item

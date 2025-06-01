@@ -14,29 +14,27 @@ public class Bullet : MonoBehaviour
     {
         //get damage from player items
         GameObject player = GameObject.FindWithTag("Player");
-        PlayerItems playerItems = player.GetComponent<PlayerItems>();
+        GameObject playerItems = GameObject.FindWithTag("PlayerItems");
 
-        playerItems.AddItem("Bow");
-        playerItems.AddItem("Knife");
 
-        if (playerItems.HasItem("Axe"))
+        if (playerItems.GetComponent<PlayerItems>().HasItem("Axe"))
         {
             //Axe
             damage += 5;
         }
-        if (playerItems.HasItem("Knife"))
+        if (playerItems.GetComponent<PlayerItems>().HasItem("Knife"))
         {
             //Knife
             damage += 7;
             bulletLifetime += 5f;
         }
-        if (playerItems.HasItem("Bow"))
+        if (playerItems.GetComponent<PlayerItems>().HasItem("Bow"))
         {
             //Bow
             damage += 5;
             bulletLifetime += 3f;
         }
-        if (playerItems.HasItem("Spear"))
+        if (playerItems.GetComponent<PlayerItems>().HasItem("Spear"))
         {
             //Spear
             damage += 5;
@@ -71,10 +69,10 @@ public class Bullet : MonoBehaviour
 
             Destroy(gameObject);
         }
-        else if (!collision.CompareTag("Player"))
-        {
-            Destroy(gameObject);
-        }
+        //else if (!collision.CompareTag("Player"))
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 
 

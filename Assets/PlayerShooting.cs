@@ -24,6 +24,8 @@ public class PlayerShooting : MonoBehaviour
 
     public GameObject PlayerAfterimage;
 
+    //Audio
+    public AudioSource SlideFX;
 
 
     private void Start()
@@ -104,6 +106,8 @@ public class PlayerShooting : MonoBehaviour
             GameObject afterimg = Instantiate(PlayerAfterimage, transform.position, transform.rotation);
             afterimg.SetActive(true);
 
+            //play sfx
+            SlideFX.Play();
         }
     }
 
