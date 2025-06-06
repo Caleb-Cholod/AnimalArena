@@ -13,6 +13,7 @@ TagManager:
   - ShopItemText2
   - ShopItemText3
   - ShopGenerator
+  - GoldText
   layers:
   - Default
   - TransparentFX
