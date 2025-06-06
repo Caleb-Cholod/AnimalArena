@@ -9,11 +9,15 @@ TagManager:
   - DataHolder
   - EnemyMelee
   - PlayerItems
+  - ShopItemText1
+  - ShopItemText2
+  - ShopItemText3
+  - ShopGenerator
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - 

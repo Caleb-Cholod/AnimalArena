@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,7 +19,8 @@ public class EnemyDirector : MonoBehaviour
     int enemiesAlive;
 
     //waves and enemy types
-    int waveNumber;
+    public int waveNumber;
+    public TMP_Text waveText;
 
     void Start()
     {
@@ -26,10 +28,17 @@ public class EnemyDirector : MonoBehaviour
         enemiesAlive = 3;
         waveNumber = DataHolder.GetComponent<DataHolder>().waveNumber;
 
+        waveText.text = "-Wave " + waveNumber + "-";
+
+
         int randomSeed = Random.Range(0, 10000);
 
         //create and add enemies based on wave
         //Enemy1
+
+        if(waveNumber != 5)
+        {
+        //normal waves
         GameObject enemy1 = Instantiate(enemyPrefab);
         enemy1.transform.position = sp1;
         enemy1.GetComponent<EnemyAI>().RestatEnemy(randomSeed, waveNumber);
@@ -53,6 +62,15 @@ public class EnemyDirector : MonoBehaviour
         enemies.Add(enemy1);
         enemies.Add(enemy2);
         enemies.Add(enemy3); 
+        }
+        else
+        {
+            GameObject enemy1 = Instantiate(enemyPrefab);
+            enemy1.transform.position = sp1;
+            enemy1.GetComponent<EnemyAI>().RestatEnemy(randomSeed, waveNumber);
+        }
+
+        
     }
 
     // Update is called once per frame

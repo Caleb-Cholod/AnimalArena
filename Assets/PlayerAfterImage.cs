@@ -8,7 +8,7 @@ public class PlayerAfterImage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        alpha = 0.25f;
+        alpha = 0.15f;
     }
 
     // Update is called once per frame

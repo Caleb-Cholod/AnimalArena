@@ -29,6 +29,8 @@ public class EnemyAI : MonoBehaviour
     public int AItype;
     public int[] goldDropped = new int[5];
 
+    public Color[] AIcolors = new Color[5];
+
     void Start()
     {
 
@@ -37,6 +39,11 @@ public class EnemyAI : MonoBehaviour
         goldDropped[2] = 8;
         goldDropped[3] = 10;
         goldDropped[4] = 12;
+
+
+
+        //assign  color
+        transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = AIcolors[AItype];
 
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
@@ -218,6 +225,45 @@ public class EnemyAI : MonoBehaviour
             }
         }
 
+
+        //AI - Boss
+        if (AItype == 5)
+        {
+
+            // Rotate toward the player
+            Vector2 direction = (player.position - transform.position).normalized;
+            float angle = Vector3.SignedAngle(transform.up, direction, Vector3.forward);
+            float step = rotationSpeed * Time.deltaTime;
+            transform.Rotate(Vector3.forward, Mathf.Clamp(angle, -step, step));
+
+            // Summon timer
+            summonDelta += Time.deltaTime;
+            if (numSummons <= 2)
+            {
+                if (summonDelta >= summonTimer)
+                {
+
+                    summonDelta = 0f;
+                    numSummons += 1;
+                    SummonFriendly();
+                }
+            }
+            shootTimer += Time.deltaTime;
+            if (shootTimer >= shootInterval)
+            {
+                shootTimer = 0f;
+                ShootAtPlayer();
+                transform.Rotate(10, 0, 0);
+                ShootAtPlayer();
+                transform.Rotate(-20, 0, 0);
+                ShootAtPlayer();
+                transform.Rotate(10, 0, 0);
+
+                shootTimer += shootInterval / 2;
+            }
+
+        }
+
     }
 
         void ShootAtPlayer()
@@ -231,7 +277,7 @@ public class EnemyAI : MonoBehaviour
         {
             GameObject bullet = Instantiate(meleePrefab, firePoint.position, firePoint.rotation);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            bullet.transform.position += transform.up;
+            bullet.transform.position += 0.5f*transform.up;
             bullet.GetComponent<EnemyBullet>().lifetime = 0.5f;
             
         }
@@ -246,6 +292,9 @@ public class EnemyAI : MonoBehaviour
 
     public void RestatEnemy(int seed, int waveNum)
     {
+        if(waveNum != 5)
+        {
+            //normal enemies
         //Set to a random type
         AItype = seed % 5;
 
@@ -254,6 +303,18 @@ public class EnemyAI : MonoBehaviour
         rotationSpeed = 150f + (seed % 60);
         shootInterval = 1.5f + (seed%20)/15;
         bulletSpeed = 4f + (seed%5)/2.5f;
+        }
+        else
+        {
+            //boss
+            AItype = 5;
+            gameObject.GetComponent<EnemyHealthBar>().maxHealth = 1500;
+            moveSpeed = 2.5f;
+            shootInterval = 1f;
+            bulletSpeed = 8f;
+
+        }
+
     }
 }
 

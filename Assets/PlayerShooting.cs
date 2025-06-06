@@ -20,34 +20,57 @@ public class PlayerShooting : MonoBehaviour
     public float fireRateAlt = 2f;
     private float FRdeltaAlt;
     public Vector2 ForceDirection;
-    private float KnockbackAmount = 25;
+    private float KnockbackAmount = 20;
 
     public GameObject PlayerAfterimage;
 
     //Audio
     public AudioSource SlideFX;
+    public AudioSource ShootFX;
 
+    //items
+    public GameObject AxeBul;
+    private bool Axe;
+
+    public GameObject TridentBul;
+    private bool Trident;
 
     private void Start()
     {
         GameObject player = GameObject.FindWithTag("Player");
         playerItems = player.GetComponent<PlayerItems>();
 
-        sr = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        //sr = transform.GetChild(0).GetComponent<SpriteRenderer>();
 
-        if (playerItems.HasItem("Boots of Mercury"))
+        if (playerItems.HasItem("BootsOfMercury"))
         {
             KnockbackAmount += 5f;
         }
-        if (playerItems.HasItem("Artemis Quiver"))
+        if (playerItems.HasItem("ArtemisQuiver"))
         {
-            fireRate -= 0.1f;
+            fireRate -= 0.2f;
+        }
+        if (playerItems.HasItem("TridentOfNeptune"))
+        {
+            
+        }
+        if (playerItems.HasItem("Axe"))
+        {
+            Axe = true;
+        }
+        if (playerItems.HasItem("TridentOfNeptune"))
+        {
+            Trident = true;
         }
     }
 
 
     void Update()
     {
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = (mouseWorldPosition - transform.position);
+        transform.up = direction;
+
         FRdelta += Time.deltaTime;
         FRdeltaAlt += Time.deltaTime;
         if (Input.GetMouseButton(0) && FRdelta > fireRate) //Left click
@@ -67,7 +90,7 @@ public class PlayerShooting : MonoBehaviour
         {
             knockbackDelta += Time.deltaTime;
             //apply knockback
-            gameObject.GetComponent<Rigidbody2D>().AddForce((ForceDirection * KnockbackAmount), ForceMode2D.Force);
+            transform.parent.gameObject.GetComponent<Rigidbody2D>().AddForce((ForceDirection * KnockbackAmount), ForceMode2D.Force);
             Debug.Log("knockback");
             GameObject afterimg = Instantiate(PlayerAfterimage, transform.position, transform.rotation);
             afterimg.SetActive(true);
@@ -82,11 +105,34 @@ public class PlayerShooting : MonoBehaviour
 
     void Shoot(int bulletType)
     {
+        ShootFX.Play();
         if (bulletType == 0)
         {
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.velocity = firePoint.up * bulletSpeed;
+
+            //items
+            if (Axe)
+            {
+                if(Random.Range(0, 5) == 1)
+                {
+                GameObject axe = Instantiate(AxeBul, firePoint.position, firePoint.rotation);
+                Rigidbody2D axerb = bullet.GetComponent<Rigidbody2D>();
+                axerb.velocity = firePoint.up * bulletSpeed;
+                }
+                
+            }
+
+            if (Trident)
+            {
+                if (Random.Range(0, 10) == 1)
+                {
+                    GameObject trid = Instantiate(TridentBul, firePoint.position, firePoint.rotation);
+                    Rigidbody2D tridentrb = bullet.GetComponent<Rigidbody2D>();
+                    tridentrb.velocity = firePoint.up * bulletSpeed;
+                }
+            }
         }
         else if (bulletType == 1)
         {

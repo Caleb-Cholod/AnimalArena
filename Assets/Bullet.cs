@@ -9,12 +9,22 @@ public class Bullet : MonoBehaviour
     private float bulletlifetimeDelta;
     private float damage;
 
+    public int bulletType;
+
 
     void Start()
     {
         //get damage from player items
         GameObject player = GameObject.FindWithTag("Player");
         GameObject playerItems = GameObject.FindWithTag("PlayerItems");
+
+
+        //bullet type
+        if(bulletType == 1)
+        {
+            //axe
+            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        }
 
 
         if (playerItems.GetComponent<PlayerItems>().HasItem("Axe"))
@@ -41,6 +51,17 @@ public class Bullet : MonoBehaviour
             bulletLifetime += 3f;
             bulletLifetime += 2f;
         }
+        if (playerItems.GetComponent<PlayerItems>().HasItem("JupitersLightning"))
+        {
+            //Spear
+            damage += 5;
+        }
+        if (playerItems.GetComponent<PlayerItems>().HasItem("VulcansHammer"))
+        {
+            //Spear
+            damage += (damage/10f);
+        }
+
 
         damage += baseDamage;
     }

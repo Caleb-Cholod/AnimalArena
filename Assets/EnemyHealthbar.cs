@@ -11,6 +11,10 @@ public class EnemyHealthBar : MonoBehaviour
     private float currentHealth = 100f;
 
     public AudioSource EnemyHitSFX;
+    public AudioSource EnemyDieSFX;
+
+    public GameObject AudioPlayer;
+
 
     void Start()
     {
@@ -64,6 +68,7 @@ public class EnemyHealthBar : MonoBehaviour
         {
             GameObject Director = GameObject.FindWithTag("EnemyDirector");
             //if its not a summon
+            EnemyDieSFX.Play();
             if (!gameObject.transform.parent.gameObject.GetComponent<EnemyAI>().isASummon)
             {
                 //update director
@@ -75,6 +80,7 @@ public class EnemyHealthBar : MonoBehaviour
 
             }
             //kill enemy
+            
             Destroy(gameObject.transform.parent.gameObject);
             
 

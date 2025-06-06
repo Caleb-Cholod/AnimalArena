@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     //Audio
     public AudioSource FootstepsFX;
     public AudioSource FootstepsFX1;
+    public AudioSource HurtFX;
+    public AudioSource DeathFX;
     private float footstepDelta;
     private bool step1 = true;
     
@@ -29,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
         transform.position = new Vector3(-4f, 0f, 0f);
 
         //get item stats
-        if (playerItems.HasItem("Boots of Mercury"))
+        if (playerItems.HasItem("BootsOfMercury"))
         {
             moveSpeed += 1f;
         }
@@ -37,7 +39,14 @@ public class PlayerMovement : MonoBehaviour
         {
             playerHealth += 12;
         }
-
+        if (playerItems.HasItem("Shield"))
+        {
+            playerHealth += 10;
+        }
+        if (playerItems.HasItem("BacchusVines"))
+        {
+            playerHealth += 10;
+        }
     }
 
     void Update()
@@ -67,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
         //rotate
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = (mouseWorldPosition - transform.position);
-        transform.up = direction; // rotate to face the mouse (up is forward in 2D)
+        //transform.up = direction; // rotate to face the mouse (up is forward in 2D)
     }
 
     void FixedUpdate()
@@ -78,13 +87,17 @@ public class PlayerMovement : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        HurtFX.Play();
         playerHealth -= amount;
         playerHealth = Mathf.Clamp(playerHealth, 0, 100);
         Debug.Log("Player health: " + playerHealth);
+        transform.GetChild(0).gameObject.GetComponent<PlayerHealthBar>().TakeDamage(amount);
 
         if (playerHealth <= 0)
         {
             //player dies - make this into a reset screen/animation/whatever
+            //play death sounds
+            DeathFX.Play();
             Destroy(this.gameObject);
         }
     }

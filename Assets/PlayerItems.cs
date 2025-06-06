@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.VersionControl;
 using UnityEngine;
@@ -9,12 +10,18 @@ public class PlayerItems : MonoBehaviour
 {
     // List of item names or item IDs
     public List<string> items = new List<string>();
+    public List<string> itemDescriptions = new List<string>();
     private int cost = 10;
+    public List<int> costs = new List<int>();
     public GameObject DataHolder;
+
+    private TMP_Text tile1Text;
+    private TMP_Text tile2Text;
+    private TMP_Text tile3Text;
 
     //Items List
     //=======================
-    //Item 1 - Axe: Increased Damage by 5, stackable up to 2 times.Summons axe around the player
+    //Item 1 - Axe: Increased Damage by 5, stackable up to 2 times. Summons axe around the player
 
     //Item 2 - Shield: Increase Health by 10, random chance to block damage(10%?) from enemy gladimal
 
@@ -57,51 +64,103 @@ public class PlayerItems : MonoBehaviour
         {
             case 0:
                 //
-                if (!items.Contains("Axe") && DataHolder.GetComponent<DataHolder>().gold >= cost)
+                if (!items.Contains("Axe") && DataHolder.GetComponent<DataHolder>().gold >= (costs[0]))
                 {
                     items.Add("Axe");
-                    DataHolder.GetComponent<DataHolder>().UpdateGold(-cost);
+                    DataHolder.GetComponent<DataHolder>().UpdateGold(0 - (costs[0]));
                 }
                 break;
             case 1:
                 //
-                if (!items.Contains("Shield") && DataHolder.GetComponent<DataHolder>().gold >= cost)
+                if (!items.Contains("Shield") && DataHolder.GetComponent<DataHolder>().gold >= (costs[1]))
                 {
                     items.Add("Shield");
-                    DataHolder.GetComponent<DataHolder>().UpdateGold(-cost);
+                    DataHolder.GetComponent<DataHolder>().UpdateGold(0 - (costs[1]));
                 }
                 break;
             case 2:
                 //
-                if (!items.Contains("Armor") && DataHolder.GetComponent<DataHolder>().gold >= cost)
+                if (!items.Contains("Armor") && DataHolder.GetComponent<DataHolder>().gold >= (costs[2]))
                 {
                     items.Add("Armor");
-                    DataHolder.GetComponent<DataHolder>().UpdateGold(-cost);
+                    DataHolder.GetComponent<DataHolder>().UpdateGold(0 - (costs[2]));
                 }
                     
                 break;
 
             case 3:
                 //
-                if (!items.Contains("Spear") && DataHolder.GetComponent<DataHolder>().gold >= cost)
+                if (!items.Contains("Spear") && DataHolder.GetComponent<DataHolder>().gold >= (costs[3]))
                 {
                     items.Add("Spear");
-                    DataHolder.GetComponent<DataHolder>().UpdateGold(-cost);
+                    DataHolder.GetComponent<DataHolder>().UpdateGold(0 - (costs[3]));
                 }
                     
                 break;
 
             case 4:
                 //
-                if (!items.Contains("ArtemisQuiver") && DataHolder.GetComponent<DataHolder>().gold >= cost)
+                if (!items.Contains("ArtemisQuiver") && DataHolder.GetComponent<DataHolder>().gold >= (costs[4]))
                 {
                     items.Add("ArtemisQuiver");
-                    DataHolder.GetComponent<DataHolder>().UpdateGold(-cost);
+                    DataHolder.GetComponent<DataHolder>().UpdateGold(0 - (costs[4]));
                 }
                     
                 break;
+            case 5:
+                //
+                if (!items.Contains("TridentOfNeptune") && DataHolder.GetComponent<DataHolder>().gold >= (costs[5]))
+                {
+                    items.Add("TridentOfNeptune");
+                    DataHolder.GetComponent<DataHolder>().UpdateGold(0 - (costs[5]));
+                }
 
+                break;
+            case 6:
+                //
+                if (!items.Contains("BootsOfMercury") && DataHolder.GetComponent<DataHolder>().gold >= (costs[6]))
+                {
+                    items.Add("BootsOfMercury");
+                    DataHolder.GetComponent<DataHolder>().UpdateGold(0 - (costs[6]));
+                }
 
+                break;
+            case 7:
+                //
+                if (!items.Contains("BaccusVines") && DataHolder.GetComponent<DataHolder>().gold >= (costs[7]))
+                {
+                    items.Add("BootsOfMercury");
+                    DataHolder.GetComponent<DataHolder>().UpdateGold(0 - (costs[7]));
+                }
+
+                break;
+            case 8:
+                //
+                if (!items.Contains("VulcansHammer") && DataHolder.GetComponent<DataHolder>().gold >= (costs[8]))
+                {
+                    items.Add("VulcansHammer");
+                    DataHolder.GetComponent<DataHolder>().UpdateGold(0 - (costs[8]));
+                }
+
+                break;
+            case 9:
+                //
+                if (!items.Contains("HerasLove") && DataHolder.GetComponent<DataHolder>().gold >= (costs[9]))
+                {
+                    items.Add("HerasLove");
+                    DataHolder.GetComponent<DataHolder>().UpdateGold(0 - (costs[9]));
+                }
+
+                break;
+            case 10:
+                //
+                if (!items.Contains("JupitersLightning") && DataHolder.GetComponent<DataHolder>().gold >= (costs[10]))
+                {
+                    items.Add("JupitersLightning");
+                    DataHolder.GetComponent<DataHolder>().UpdateGold(0 - (costs[10]));
+                }
+
+                break;
 
             default:
                 break;
